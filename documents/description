@@ -1,0 +1,35 @@
+Code Delivery
+Estudo de caso prático:
+
+O que iremos desenvolver?
+
+    .Sistema de entregas que permite visualizar em tempo real o veículo do entregador
+    .Há possibilidade de múltiplos entregadores simultâneos
+    .Serviço simulador que enviará a posição em tempo real de cada entregador
+    .Os dados de cada entrega, bem como as posições, serão armazenadas no Elasticsearch para futuras análises
+
+Alguns desafios
+
+    .Para evitar perda de informação caso o serviço backend fique indisponível por alguns momentos, NÃO trabalharemos com REST.
+        - Trabalharemos com o Apache Kafka para o envio e recebimento de dados entre os sistemas.
+    
+    .Não é responsabilidade do serviço backend persistir os dados no Elasticsearch. Logo, como armazenar as informações no Elasticsearch??
+        - Utilizaremos o Kafka Connect que também consumirá os dados do simulador e fará a inserção no Elasticsearch.
+
+    .Precisaremos exibir em tempo real a localização de cada entregador
+        - Trabalharemos com websockets. O backend receberá os dados do simulador, e enviará as posições para o frontend via websockets
+
+Dinamica do sistema
+                           2                                 1                      5
+    Simulador            <--           Apache Kafka       <--      Backend       -->         Frontend                  
+                        -->                                -->                          
+                        3                                   4                   
+                                            i  6
+                                            v 
+                                        Kafka Connect
+
+                                            i
+                                            v  7
+
+    Kibana           <-->                 Elasticsearch
+                        8/9

@@ -1,0 +1,16 @@
+Tecnologias a serem utilizadas
+
+    .Simulador: Golang   
+
+    .Backend: Nest.js & Mongo
+
+    .Frontend: React
+
+    .Kafka & Kafka Connect
+
+    .Elasticsearch & Kibana
+
+    .Docker e Kubernets
+
+    .Istio, Kiali, Prometheus & Grafana
+    .
